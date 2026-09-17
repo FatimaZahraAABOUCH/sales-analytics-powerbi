@@ -106,6 +106,68 @@ DIVIDE(
 - Monthly completed revenue declined significantly after October 2025.
 - The city slicer enables geographical performance comparisons.
 
+## Time Intelligence
+
+A dedicated calendar table was created to support time-based analysis and comparisons.
+
+The temporal analysis page includes:
+
+- Monthly revenue comparison with the previous year
+- Year-over-year monthly growth
+- Year-to-date completed revenue
+- Year-to-date revenue for the previous year
+- Year-to-date growth rate
+- Interactive year filter
+- Page navigation
+
+### Additional DAX Measures
+
+```DAX
+Completed Revenue Previous Year =
+CALCULATE(
+    [Completed Revenue],
+    SAMEPERIODLASTYEAR(Calendar[Date])
+)
+```
+
+```DAX
+Revenue YoY % =
+DIVIDE(
+    [Completed Revenue] - [Completed Revenue Previous Year],
+    [Completed Revenue Previous Year]
+)
+```
+
+```DAX
+Completed Revenue YTD =
+TOTALYTD(
+    [Completed Revenue],
+    Calendar[Date]
+)
+```
+
+```DAX
+Completed Revenue YTD Previous Year =
+CALCULATE(
+    [Completed Revenue YTD],
+    SAMEPERIODLASTYEAR(Calendar[Date])
+)
+```
+
+```DAX
+Revenue YTD YoY % =
+DIVIDE(
+    [Completed Revenue YTD] - [Completed Revenue YTD Previous Year],
+    [Completed Revenue YTD Previous Year]
+)
+```
+
 ## Dashboard Preview
 
-![Dashboard Preview](dashboard_preview.png)
+### General Overview
+
+![General Dashboard](dashboard_preview.png)
+
+### Time Analysis
+
+![Time Analysis](temporal_analysis.png)
